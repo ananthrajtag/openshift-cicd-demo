@@ -15,8 +15,6 @@ spec:
     params:
       - name: TLSVERIFY
         value: "false"
-      - name: PATH_CONTEXT
-        value: ./application
     resources:
       inputs:
       - name: source
