@@ -2,7 +2,7 @@
 
 oc new-project hello-dev
 
-oc new-app -f ./application/src/main/resources/template.yaml -n hello-dev
+oc new-app -f ./src/main/resources/template.yaml -n hello-dev
 
 oc create -f ./pipeline/resources/hello-git.yaml -n hello-dev
 oc create -f ./pipeline/resources/hello-image.yaml -n hello-dev

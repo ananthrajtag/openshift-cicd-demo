@@ -9,7 +9,7 @@ spec:
   - name: hello-image
     type: image
   tasks:
-  - name: Build
+  - name: build
     taskRef:
       name: s2i-java-8
     params:
@@ -24,7 +24,7 @@ spec:
       outputs:
       - name: image
         resource: hello-image
-  - name: Deploy
+  - name: deploy
     taskRef:
       name: openshift-client
     runAfter:
