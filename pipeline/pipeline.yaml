@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: hello-pipeline
+spec:
+  resources:
+  - name: hello-git
+    type: git
+  - name: hello-image
+    type: image
+  tasks:
+  - name: Build
+    taskRef:
+      name: s2i-java-8
+    params:
+      - name: TLSVERIFY
+        value: "false"
+      - name: PATH_CONTEXT
+        value: ./application
+    resources:
+      inputs:
+      - name: source
+        resource: hello-git
+      outputs:
+      - name: image
+        resource: hello-image
+  - name: Deploy
+    taskRef:
+      name: openshift-client
+    runAfter:
+      - build
+    params:
+    - name: ARGS
+      value:
+        - rollout
+        - latest
+        - hello
